@@ -75,6 +75,13 @@ jQuery(document).ready(function(){
     }else{
         jQuery('.md2_font input').removeAttr("disabled");
     }
+    var selectVMD3 = jQuery('input.md3:checked').val();
+    if(selectVMD3 == 'false'){
+        jQuery('.md3_sub input').attr("disabled", "disabled");
+    }else{
+        jQuery('.md3_sub input').removeAttr("disabled");
+    }
+    jQuery("#mdx_md3_seed").wpColorPicker();
     jQuery('#insert-media-button').click(function(){
         var custom_uploader = wp.media({
             multiple: false,
@@ -201,6 +208,14 @@ jQuery(".md2").click(function(){
         jQuery('.md2_font input').attr("disabled", "disabled");
     }else{
         jQuery('.md2_font input').removeAttr("disabled");
+    }
+});
+jQuery(".md3").click(function(){
+    var mdx_val_md3 = jQuery('input.md3:checked').val();
+    if(mdx_val_md3=='false'){
+        jQuery('.md3_sub input').attr("disabled", "disabled");
+    }else{
+        jQuery('.md3_sub input').removeAttr("disabled");
     }
 });
 jQuery(".mdx_stbs").click(function(){

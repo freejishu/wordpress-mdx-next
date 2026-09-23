@@ -71,6 +71,23 @@ wp_enqueue_script( 'wp-color-picker' );
 		} else {
 			mdx_update_option( 'mdx_md2_font', 'false' );
 		}
+		mdx_update_option( 'mdx_md3', $_POST['mdx_md3'] );
+		$mdx_md3_seed = sanitize_text_field( $_POST['mdx_md3_seed'] );
+		if ( preg_match( '/^#[0-9a-fA-F]{6}$/', $mdx_md3_seed ) ) {
+			mdx_update_option( 'mdx_md3_seed', $mdx_md3_seed );
+		}
+		$mdx_md3_dynamic = sanitize_text_field( $_POST['mdx_md3_dynamic'] );
+		if ( isset( $mdx_md3_dynamic ) ) {
+			mdx_update_option( 'mdx_md3_dynamic', $mdx_md3_dynamic );
+		} else {
+			mdx_update_option( 'mdx_md3_dynamic', 'false' );
+		}
+		$mdx_md3_symbols = sanitize_text_field( $_POST['mdx_md3_symbols'] );
+		if ( isset( $mdx_md3_symbols ) ) {
+			mdx_update_option( 'mdx_md3_symbols', $mdx_md3_symbols );
+		} else {
+			mdx_update_option( 'mdx_md3_symbols', 'false' );
+		}
 		mdx_update_option( 'mdx_login_md', sanitize_text_field( $_POST['mdx_login_md'] ) );
 		mdx_update_option( 'mdx_chrome_color', sanitize_text_field( $_POST['mdx_chrome_color'] ) );
 		mdx_update_option( 'mdx_title_bar', sanitize_text_field( $_POST['mdx_title_bar'] ) );
@@ -267,6 +284,52 @@ wp_enqueue_script( 'wp-color-picker' );
                         <label><input type="radio" name="mdx_md2_font" value="false" <?php if ( $mdx_v_md2_font == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
                         </label><br>
                         <p class="description"><?php _e( '开启后，部分标题文字将会使用 Material Design 2 风格字体显示。<strong>请注意该字体仅包含拉丁字符。</strong>', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( 'Material Design 3 (Material You)', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_md3 = mdx_get_option( 'mdx_md3' ); ?>
+                    <fieldset>
+                        <label><input type="radio" class="md3" name="mdx_md3" value="true" <?php if ( $mdx_v_md3 == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" class="md3" name="mdx_md3" value="false" <?php if ( $mdx_v_md3 == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，主题将会使用 Material Design 3 (Material You) 风格：更大的圆角、胶囊按钮、柔和阴影与 tonal 配色。仅改变外观，不影响功能。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="md3_sub">
+                <th scope="row"><label for="mdx_md3_seed"><?php _e( 'MD3 主色（种子色）', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_md3_seed" type="text" id="mdx_md3_seed" value="<?php echo esc_attr( mdx_get_option( 'mdx_md3_seed' ) ); ?>">
+                    <p class="description"><?php _e( 'Material Design 3 配色方案的种子颜色，整套 tonal 色板由它派生。默认为 MD3 基准紫 <code>#6750a4</code>。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr class="md3_sub">
+                <th scope="row"><?php _e( 'MD3 动态配色', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_md3_dynamic = mdx_get_option( 'mdx_md3_dynamic' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_md3_dynamic" value="true" <?php if ( $mdx_v_md3_dynamic == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_md3_dynamic" value="false" <?php if ( $mdx_v_md3_dynamic == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，将从当前页面的特色图像中提取主色调作为种子色（类似 Android 的壁纸取色），失败时回退到上方设置的种子色。跨域图片无法取色时会自动回退。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr class="md3_sub">
+                <th scope="row"><?php _e( 'MD3 图标（Material Symbols）', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_md3_symbols = mdx_get_option( 'mdx_md3_symbols' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_md3_symbols" value="true" <?php if ( $mdx_v_md3_symbols == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_md3_symbols" value="false" <?php if ( $mdx_v_md3_symbols == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，使用 Material Design 3 的 Material Symbols 图标字体替换原有的 Material Icons。', 'mdx' ); ?></p>
                     </fieldset>
                 </td>
             </tr>

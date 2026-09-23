@@ -1,0 +1,302 @@
+/*
+ * Material Design 3 (Material You) style layer for MDx
+ * 仅在后台开启 mdx_md3 时加载，通过 CSS 变量与覆盖规则将 MDUI 1 组件重绘为 MD3 观感。
+ * 色板由 --mdx-md3-seed（PHP 内联输出，可被 js/md3.js 动态覆盖）经 color-mix 派生。
+ * 不支持 color-mix 的旧浏览器会静默回退到原有 MD2 外观。
+ */
+
+/* ========== 1. 设计令牌（Tokens） ========== */
+:root {
+    /* MD3 浅色方案（由种子色派生的 tonal 角色） */
+    --mdx-md3-primary: var(--mdx-md3-seed);
+    --mdx-md3-on-primary: #ffffff;
+    --mdx-md3-primary-container: color-mix(in oklab, var(--mdx-md3-seed) 26%, #ffffff);
+    --mdx-md3-on-primary-container: color-mix(in oklab, var(--mdx-md3-seed) 62%, #000000);
+    --mdx-md3-secondary-container: color-mix(in oklab, var(--mdx-md3-seed) 16%, #ffffff);
+    --mdx-md3-on-secondary-container: color-mix(in oklab, var(--mdx-md3-seed) 55%, #000000);
+    --mdx-md3-surface: color-mix(in oklab, var(--mdx-md3-seed) 2.5%, #ffffff);
+    --mdx-md3-surface-container: color-mix(in oklab, var(--mdx-md3-seed) 5%, #f3f3f3);
+    --mdx-md3-surface-container-high: color-mix(in oklab, var(--mdx-md3-seed) 8%, #f0f0f0);
+    --mdx-md3-on-surface: #1d1b20;
+    --mdx-md3-on-surface-variant: #49454f;
+    --mdx-md3-outline: #79747e;
+    /* MD3 阴影（更柔和） */
+    --mdx-md3-shadow-1: 0 1px 2px 0 rgba(0, 0, 0, .3), 0 1px 3px 1px rgba(0, 0, 0, .15);
+    --mdx-md3-shadow-2: 0 1px 2px 0 rgba(0, 0, 0, .3), 0 2px 6px 2px rgba(0, 0, 0, .15);
+    --mdx-md3-shadow-3: 0 1px 3px 0 rgba(0, 0, 0, .3), 0 4px 8px 3px rgba(0, 0, 0, .15);
+}
+
+/* MD3 深色方案（跟随 MDx 夜间模式的 body class） */
+body.mdui-theme-layout-dark {
+    --mdx-md3-primary: color-mix(in oklab, var(--mdx-md3-seed) 58%, #ffffff);
+    --mdx-md3-on-primary: color-mix(in oklab, var(--mdx-md3-seed) 55%, #000000);
+    --mdx-md3-primary-container: color-mix(in oklab, var(--mdx-md3-seed) 42%, #000000);
+    --mdx-md3-on-primary-container: color-mix(in oklab, var(--mdx-md3-seed) 32%, #ffffff);
+    --mdx-md3-secondary-container: color-mix(in oklab, var(--mdx-md3-seed) 22%, #1d1b20);
+    --mdx-md3-on-secondary-container: color-mix(in oklab, var(--mdx-md3-seed) 24%, #ffffff);
+    --mdx-md3-surface: #141218;
+    --mdx-md3-surface-container: #211f26;
+    --mdx-md3-surface-container-high: #2b2930;
+    --mdx-md3-on-surface: #e6e0e9;
+    --mdx-md3-on-surface-variant: #cac4d0;
+    --mdx-md3-outline: #938f99;
+}
+
+/* ========== 2. 按钮：胶囊形状 + 取消全大写 ========== */
+.mdui-btn {
+    border-radius: 20px;
+    text-transform: none;
+    font-weight: 500;
+    letter-spacing: .1px;
+}
+
+.mdui-btn-icon,
+.mdui-fab.mdui-btn-icon {
+    border-radius: 50%;
+}
+
+/* 彩色实底按钮 → MD3 filled（primary） */
+.mdui-btn[class*="mdui-color-theme-accent"],
+.mdui-btn[class*="mdui-color-theme"]:not(.mdui-btn-icon) {
+    background-color: var(--mdx-md3-primary) !important;
+    color: var(--mdx-md3-on-primary) !important;
+}
+
+.mdui-btn:active,
+.mdui-btn:focus {
+    box-shadow: none;
+}
+
+/* ========== 3. FAB：大圆角方形 ========== */
+.mdui-fab {
+    border-radius: 16px;
+    box-shadow: var(--mdx-md3-shadow-3);
+}
+
+.mdui-fab-mini {
+    border-radius: 12px;
+}
+
+.mdui-fab[class*="mdui-color-theme-accent"],
+.mdui-fab[class*="mdui-color-theme"] {
+    background-color: var(--mdx-md3-primary-container) !important;
+    color: var(--mdx-md3-on-primary-container) !important;
+}
+
+/* ========== 4. 卡片与容器：12px 圆角 + 柔和阴影 ========== */
+.mdui-card,
+.mdui-panel,
+.searchCard,
+.mdx-say-after.mdui-card,
+.PostMainImg0,
+.backGround {
+    border-radius: 12px !important;
+}
+
+.mdui-card {
+    box-shadow: var(--mdx-md3-shadow-1);
+}
+
+.ArtMain0 {
+    border-radius: 16px 16px !important;
+}
+
+.mdui-dialog {
+    border-radius: 28px !important;
+}
+
+.mdui-menu,
+.mdui-snackbar {
+    border-radius: 8px !important;
+}
+
+/* ========== 5. 应用栏 / 工具栏：MD3 tonal 着色 ========== */
+/* 浅色：primary-container 色调栏（Material You 风格） */
+body .mdui-toolbar.mdui-color-theme,
+body .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
+    background-color: var(--mdx-md3-primary-container) !important;
+    color: var(--mdx-md3-on-primary-container) !important;
+}
+
+/* 深色：surface-container（MD3 深色应用栏规范） */
+body.mdui-theme-layout-dark .mdui-toolbar.mdui-color-theme,
+body.mdui-theme-layout-dark .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
+    background-color: var(--mdx-md3-surface-container) !important;
+    color: var(--mdx-md3-on-surface) !important;
+}
+
+body .mdui-toolbar.mdui-color-theme a,
+body .mdui-toolbar.mdui-color-theme .mdui-btn,
+body .mdui-toolbar.mdui-color-theme .seainput {
+    color: inherit !important;
+}
+
+/* 文字主题色（对话框按钮等）→ MD3 primary */
+body[class] .mdui-text-color-theme-accent,
+body[class] .mdui-text-color-theme,
+body[class] .mdui-dialog-actions .mdui-btn {
+    color: var(--mdx-md3-primary) !important;
+}
+
+/* ========== 6. 抽屉与导航：选中态 tonal pill ========== */
+.mdui-drawer {
+    border-radius: 0 16px 16px 0;
+}
+
+.mdui-drawer.mdui-drawer-right {
+    border-radius: 16px 0 0 16px;
+}
+
+#mdx_menu li.current-menu-item,
+#mdx_menu li.current_page_item,
+.mdui-drawer li.current-menu-item,
+.mdui-drawer li.current_page_item {
+    background-color: var(--mdx-md3-secondary-container);
+    border-radius: 28px;
+}
+
+#mdx_menu li.current-menu-item a,
+#mdx_menu li.current_page_item a,
+.mdui-drawer li.current-menu-item .mdui-list-item-content,
+.mdui-drawer li.current_page_item .mdui-list-item-content {
+    color: var(--mdx-md3-on-secondary-container);
+}
+
+/* ========== 7. 文本框：MD3 filled 风格 ========== */
+.mdui-textfield {
+    border-radius: 12px 12px 0 0;
+}
+
+.mdui-textfield-input {
+    border-bottom-color: var(--mdx-md3-outline);
+}
+
+.mdui-textfield-focus .mdui-textfield-input,
+.mdui-textfield-input:focus {
+    border-bottom-color: var(--mdx-md3-primary);
+    box-shadow: 0 1px 0 0 var(--mdx-md3-primary);
+}
+
+.mdui-textfield-label,
+.mdui-textfield-focus .mdui-textfield-label {
+    color: var(--mdx-md3-on-surface-variant);
+}
+
+.mdui-textfield-focus .mdui-textfield-label {
+    color: var(--mdx-md3-primary);
+}
+
+/* ========== 8. 列表 / 菜单项圆角 ========== */
+.mdui-menu .mdui-menu-item,
+.mdui-list .mdui-list-item {
+    border-radius: 8px;
+}
+
+.mdui-list .mdui-list-item:hover,
+.mdui-menu .mdui-menu-item:hover {
+    background-color: color-mix(in oklab, var(--mdx-md3-on-surface) 8%, transparent);
+}
+
+/* ========== 9. 选项卡墨水条 ========== */
+.mdui-tab .mdui-tab-indicator,
+.mdui-tab a.mdui-tab-active {
+    color: var(--mdx-md3-primary);
+}
+
+.mdui-tab .mdui-tab-indicator {
+    background-color: var(--mdx-md3-primary);
+    border-radius: 3px 3px 0 0;
+    height: 3px;
+}
+
+/* ========== 10. 链接与正文强调 ========== */
+article a {
+    color: var(--mdx-md3-primary);
+}
+
+/* 选中文字 */
+::selection {
+    background: var(--mdx-md3-primary-container);
+    color: var(--mdx-md3-on-primary-container);
+}
+
+/* ========== 11. 进度 / 加载指示 ========== */
+.mdui-progress .mdui-progress-determinate,
+.mdui-progress .mdui-progress-indeterminate,
+.mdui-spinner-color-1.mdui-spinner-layer,
+.mdui-spinner-layer::after {
+    border-color: var(--mdx-md3-primary);
+    background-color: var(--mdx-md3-primary);
+}
+
+.mdui-spinner-layer::after {
+    background-color: transparent;
+}
+
+/* ========== 12. 深色模式表面色对齐 MD3 ========== */
+/* 关闭 MDx 为深色可读性加的 invert 滤镜（MD3 有自己的深色色板，滤镜会把颜色反转错） */
+body.mdui-theme-layout-dark #mdx_menu .current-menu-item,
+body.mdui-theme-layout-dark #mdx_menu .current-menu-item > ul,
+body.mdui-theme-layout-dark #postlist h1,
+body.mdui-theme-layout-dark article.searchCard h1,
+body.mdui-theme-layout-dark article > h1,
+body.mdui-theme-layout-dark article > h2,
+body.mdui-theme-layout-dark article > h3,
+body.mdui-theme-layout-dark .mdui-progress,
+body.mdui-theme-layout-dark .mdui-spinner,
+body.mdui-theme-layout-dark .mdui-tab-indicator,
+body.mdui-theme-layout-dark .mdx-side-title a,
+body.mdui-theme-layout-dark .mdx-toc-item.mdui-list-item-active,
+body.mdui-theme-layout-dark .mdx-toc-item.mdui-list-item-active > span,
+body.mdui-theme-layout-dark #mdx-toc-select .mdui-tab-active,
+body.mdui-theme-layout-dark #mdx-toc-preview .mdx-toc-preview-item.mdx-toc-preview-item-active,
+body.mdui-theme-layout-dark #mdx-cookie-notice i.mdui-icon {
+    filter: none !important;
+}
+
+/* 滤镜关闭后，这些元素原本依赖反转获得深色可读色，改用 MD3 深色 primary 显式着色 */
+body.mdui-theme-layout-dark #postlist h1,
+body.mdui-theme-layout-dark article.searchCard h1,
+body.mdui-theme-layout-dark article > h1,
+body.mdui-theme-layout-dark article > h2,
+body.mdui-theme-layout-dark article > h3,
+body.mdui-theme-layout-dark .mdx-side-title a,
+body.mdui-theme-layout-dark .mdx-toc-item.mdui-list-item-active,
+body.mdui-theme-layout-dark .mdx-toc-item.mdui-list-item-active > span,
+body.mdui-theme-layout-dark #mdx-toc-select .mdui-tab-active,
+body.mdui-theme-layout-dark #mdx-toc-preview .mdx-toc-preview-item.mdx-toc-preview-item-active,
+body.mdui-theme-layout-dark #mdx-cookie-notice i.mdui-icon,
+body.mdui-theme-layout-dark #comments-navi span,
+body.mdui-theme-layout-dark .mdx-side-title span {
+    color: var(--mdx-md3-primary) !important;
+}
+
+body.mdui-theme-layout-dark .main,
+body.mdui-theme-layout-dark .PostMainPage,
+body.mdui-theme-layout-dark.body-grey,
+body.mdui-theme-layout-dark.body-grey1 {
+    background-color: var(--mdx-md3-surface) !important;
+}
+
+body.mdui-theme-layout-dark .ArtMain0,
+body.mdui-theme-layout-dark .mdui-card,
+body.mdui-theme-layout-dark .searchCard,
+body.mdui-theme-layout-dark .mdui-panel {
+    background-color: var(--mdx-md3-surface-container) !important;
+    color: var(--mdx-md3-on-surface);
+}
+
+body.mdui-theme-layout-dark .mdui-textfield-input {
+    color: var(--mdx-md3-on-surface);
+}
+
+/* ========== 13. 杂项 ========== */
+.mdui-chip {
+    border-radius: 8px;
+}
+
+.mdui-tooltip {
+    border-radius: 4px;
+}
+
+/* MD3 状态下站点主色变量由种子色接管（PHP 内联输出 rgb 三元组并带 !important） */

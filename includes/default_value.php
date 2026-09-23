@@ -118,6 +118,10 @@ $mdx_default_values = array(
     'mdx_seo_canonical' => 'true',
     'mdx_index_video_url' => '',
     'mdx_index_video_pc' => 'true',
-    'mdx_index_video_mobile' => 'false'
+    'mdx_index_video_mobile' => 'false',
+    'mdx_md3' => 'false',
+    'mdx_md3_seed' => '#6750a4',
+    'mdx_md3_dynamic' => 'false',
+    'mdx_md3_symbols' => 'false'
 );
 ?>

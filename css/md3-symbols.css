@@ -1,0 +1,20 @@
+/*
+ * Material Symbols（MD3 图标）字体层
+ * 仅在后台开启 mdx_md3 且 mdx_md3_symbols 时加载。
+ * Material Symbols 与 Material Icons 对存量图标保持相同的连字（ligature）名称
+ * 与 PUA 码点，因此可直接替换字体族。字体为 Apache-2.0 许可（见同目录 LICENSE.txt）。
+ */
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    font-style: normal;
+    font-weight: 100 700;
+    src: local('Material Symbols Outlined'),
+         url(../mdui/icons/material-symbols/MaterialSymbolsOutlined.woff2) format('woff2');
+    font-display: block;
+}
+
+.material-icons {
+    font-family: 'Material Symbols Outlined' !important;
+    font-weight: normal;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
