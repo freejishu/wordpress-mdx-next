@@ -49,7 +49,7 @@ function mdx_display_sub_function_three(){
 
     ($mdx_now_version != get_option('mdx_version')) ? $mdx_update_notice = '<p style="font-size:15px;"><strong>'.__('新版本已经发布。去<a href="update-core.php">更新</a>。', 'mdx').'</strong></p>' : $mdx_update_notice = '';
 
-    $mdx_php_content = file_get_contents(get_theme_root()."/mdx/footer.php");
+    $mdx_php_content = file_get_contents(get_template_directory()."/footer.php");
     $mdx_results = strpos($mdx_php_content, 'href="https://flyhigher.top"');
     $mdx_ifedit = '';
     if($mdx_results === false){
@@ -59,7 +59,7 @@ function mdx_display_sub_function_three(){
 
 echo '<div class="wrap">
 <h1>'.__('MDx 主题 - 关于', 'mdx').'</h1>'.$mdx_ifedit.$mdx_news.'
-<p class="mdx-admin-img"><img src="../wp-content/themes/mdx/img/admin.jpg"></p>
+<p class="mdx-admin-img"><img src="'.get_template_directory_uri().'/img/admin.jpg"></p>
 <h2 style="font-size:19px;">'.__('感谢使用 MDx 主题', 'mdx').'</h2>
 <p style="font-size:15px;">'.__('我是 Axton Yao，这个主题由我开发。我的网站是', 'mdx').' <a href="https://flyhigher.top" target="_blank">flyhigher.top</a>'.__('。', 'mdx').'</p>
 <p style="font-size:15px;">'.__('对主题有任何疑问，建议先查阅 ', 'mdx').'<a href="https://doc.flyhigher.top/mdx/" target="_blank">'.__('主题文档', 'mdx').'</a>'.__('。', 'mdx').'</p>

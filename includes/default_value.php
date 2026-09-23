@@ -113,6 +113,11 @@ $mdx_default_values = array(
     'mdx_footer_say' => 'Hello => MDx!',
     'mdx_footer' => '',
     'mdx_hide_footer' => 'false',
-    'mdx_friendly_links_style' => '0'
+    'mdx_friendly_links_style' => '0',
+    'mdx_seo_des_fallback' => 'true',
+    'mdx_seo_canonical' => 'true',
+    'mdx_index_video_url' => '',
+    'mdx_index_video_pc' => 'true',
+    'mdx_index_video_mobile' => 'false'
 );
 ?>

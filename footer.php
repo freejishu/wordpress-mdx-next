@@ -271,6 +271,46 @@ if (is_home()) {
 } else {
     $mdx_js_name = 'js';
 } ?>
+<?php
+// 首页视频背景（wordpress-mdx-next 新增）
+$mdx_index_video_url = mdx_get_option('mdx_index_video_url');
+if (is_home() && !empty($mdx_index_video_url) && mdx_get_option('mdx_index_head_style') !== 'slide' && in_array(mdx_get_option('mdx_index_show'), array('0', '2', '3'), true)) {
+    ?>
+    <script>
+        (function () {
+            var mdxIndexVideoUrl = <?php echo wp_json_encode($mdx_index_video_url); ?>;
+            var mdxVideoAllowPc = <?php echo mdx_get_option('mdx_index_video_pc') === 'true' ? 'true' : 'false'; ?>;
+            var mdxVideoAllowMobile = <?php echo mdx_get_option('mdx_index_video_mobile') === 'true' ? 'true' : 'false'; ?>;
+            var mdxUa = navigator.userAgent.toLowerCase();
+            var mdxIsMobile = /android|iphone|ipad|ipod|mobile/.test(mdxUa);
+            if ((mdxIsMobile && !mdxVideoAllowMobile) || (!mdxIsMobile && !mdxVideoAllowPc)) {
+                return;
+            }
+            var mdxInjectVideo = function () {
+                var mdxFirstPage = document.querySelector('.theFirstPage');
+                if (!mdxFirstPage || mdxFirstPage.querySelector('video.mdx-index-video')) {
+                    return;
+                }
+                var mdxVideo = document.createElement('video');
+                mdxVideo.className = 'mdx-index-video';
+                mdxVideo.src = mdxIndexVideoUrl;
+                mdxVideo.autoplay = true;
+                mdxVideo.muted = true;
+                mdxVideo.loop = true;
+                mdxVideo.setAttribute('playsinline', '');
+                mdxVideo.style.cssText = 'width:100%;height:150%;position:absolute;top:50%;left:0;transform:translateY(-50%);object-fit:cover;';
+                mdxFirstPage.appendChild(mdxVideo);
+                mdxFirstPage.style.filter = 'brightness(0.85)';
+            };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', mdxInjectVideo);
+            } else {
+                mdxInjectVideo();
+            }
+        })();
+    </script>
+    <?php
+} ?>
 <script type='text/javascript' src='<?php echo $files_root; ?>/js/<?php echo $mdx_js_name ?>.js?ver=<?php echo get_option("mdx_version_commit"); ?>'></script><?php echo htmlspecialchars_decode(mdx_get_option('mdx_footer_js')); ?></body>
 <!--Theme MDx Version <?php echo get_option('mdx_version_commit'); ?>-->
 </html>

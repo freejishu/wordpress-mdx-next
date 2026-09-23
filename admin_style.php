@@ -101,6 +101,9 @@ wp_enqueue_script( 'wp-color-picker' );
 		mdx_update_option( 'mdx_index_slide_posts_cat', sanitize_text_field( $_POST['mdx_index_slide_posts_cat'] ) );
 		mdx_update_option( 'mdx_index_img', sanitize_text_field( $_POST['mdx_index_img'] ) );
 		mdx_update_option( 'mdx_index_img_bg', sanitize_text_field( $_POST['mdx_index_img_bg'] ) );
+		mdx_update_option( 'mdx_index_video_url', esc_url_raw( $_POST['mdx_index_video_url'] ) );
+		mdx_update_option( 'mdx_index_video_pc', sanitize_text_field( $_POST['mdx_index_video_pc'] ) );
+		mdx_update_option( 'mdx_index_video_mobile', sanitize_text_field( $_POST['mdx_index_video_mobile'] ) );
 		mdx_update_option( 'mdx_side_img', esc_url_raw( $_POST['mdx_side_img'] ) );
 		mdx_update_option( 'mdx_side_info', sanitize_text_field( $_POST['mdx_side_info'] ) );
 		mdx_update_option( 'mdx_side_head', esc_url_raw( $_POST['mdx_side_head'] ) );
@@ -327,6 +330,39 @@ wp_enqueue_script( 'wp-color-picker' );
                     <button type="button" id="use-bing-api" class="button mdx_stbsip8"><?php _e( '使用必应美图', 'mdx' ); ?></button>
                     <p class="description"><?php _e( '你可以上传或指定你的媒体库中的图片作为首页上方显示的图片。<strong>注意，“简单”和“朴素”首页样式不会显示首页图片。</strong><br>无论你是否使用首页幻灯片，你都需要设定一张首页图片。<br>如使用必应美图，可在括号内指定图片的日期。0为今日图片，-1为明日准备使用的图片，1为昨日的图片，以此类推，最多到前16日。', 'mdx' ); ?></p>
                     <img id="img1" style="width:100%;max-width:300px;height:auto;margin-top:5px;"></img>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><label for="mdx_index_video_url"><?php _e( '首页视频背景', 'mdx' ); ?></label></th>
+                <td>
+                    <input name="mdx_index_video_url" type="url" id="mdx_index_video_url" value="<?php echo esc_attr( mdx_get_option( 'mdx_index_video_url' ) ); ?>" class="regular-text">
+                    <p class="description"><?php _e( '在这里输入视频 URL（如 mp4）。设置后，首页图片区域将改为循环静音播放该视频。留空代表不开启此功能。<strong>注意，“简单”、“朴素”首页样式及首页幻灯片不会显示视频背景。</strong>', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '首页视频背景 - 桌面端', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_index_video_pc = mdx_get_option( 'mdx_index_video_pc' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_index_video_pc" value="true" <?php if ( $mdx_v_index_video_pc == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_index_video_pc" value="false" <?php if ( $mdx_v_index_video_pc == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，桌面端（PC）访问者可以看到首页视频背景。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( '首页视频背景 - 移动端', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_index_video_mobile = mdx_get_option( 'mdx_index_video_mobile' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_index_video_mobile" value="true" <?php if ( $mdx_v_index_video_mobile == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_index_video_mobile" value="false" <?php if ( $mdx_v_index_video_mobile == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，移动端（手机/平板，按 User-Agent 判断）访问者可以看到首页视频背景。考虑到流量消耗，建议保持关闭。', 'mdx' ); ?></p>
+                    </fieldset>
                 </td>
             </tr>
             <tr>

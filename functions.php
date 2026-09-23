@@ -397,7 +397,7 @@ function get_the_link_items($id = null) {
                 $rel = 'rel="'.$bookmark->link_rel.'" ';
             }
             if ($mdx_v_friendly_links_style == '0') {
-                $output .= '<div class="mdui-row mdui-col-xs-6 mdui-col-sm-4 links-co-grid"><div class="links-c-grid mdui-color-theme"></div><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'"><div class="mdx-links-bg-grid '.$lazy_load.'"></div></a><div class="mdui-grid-tile-actions links-des-grid"><div class="mdui-grid-tile-text"><div class="mdui-grid-tile-title links-name-grid"><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'">'.$bookmark->link_name.'</a></div><div class="mdui-grid-tile-subtitle">'.$bookmark->link_description.'</div></div></div></div>';
+                $output .= '<div class="mdui-row mdui-col-xs-4 mdui-col-sm-3 links-co-grid"><div class="links-c-grid mdui-color-theme"></div><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'"><div class="mdx-links-bg-grid '.$lazy_load.'"></div></a><div class="mdui-grid-tile-actions links-des-grid"><div class="mdui-grid-tile-text"><div class="mdui-grid-tile-title links-name-grid"><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'">'.$bookmark->link_name.'</a></div><div class="mdui-grid-tile-subtitle">'.$bookmark->link_description.'</div></div></div></div>';
             } elseif ($mdx_v_friendly_links_style == '1') {
                 if ($bookmark->link_rss != null) {
                     $rss_html = '

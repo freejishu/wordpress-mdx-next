@@ -60,8 +60,10 @@ if ( is_single() || is_page() ) {
 	}
 } else if ( $mdx_des != '' ) {
 	$page_describe = $mdx_des;
-} else {
+} else if ( mdx_get_option( 'mdx_seo_des_fallback' ) === 'true' ) {
 	$page_describe = get_bloginfo( 'description', 'display' );
+} else {
+	$page_describe = '';
 }
 
 $mdx_current_url = mdx_get_now_url( is_single(), isset( $post ) ? $post->ID : 0 );
@@ -116,7 +118,7 @@ $mdx_current_url = mdx_get_now_url( is_single(), isset( $post ) ? $post->ID : 0 
 
 		<?php if ( ! $isUsedSEO ): ?>
             <meta property="og:title" content="<?php echo $title; ?>">
-            <meta property="og:type" content="article">
+            <meta property="og:type" content="<?php echo ( is_single() || is_page() ) ? 'article' : 'website'; ?>">
             <meta property="og:url" content="<?php echo $mdx_current_url; ?>">
 			<?php $opt_mdx_share_twitter_username = mdx_get_option( 'mdx_share_twitter_username' ); ?>
             <meta property="og:description" content="<?php echo $page_describe; ?>">
@@ -128,12 +130,16 @@ $mdx_current_url = mdx_get_now_url( is_single(), isset( $post ) ? $post->ID : 0 
 
         <meta itemprop="name" content="<?php echo $title; ?>">
         <meta itemprop="image" content="<?php echo $index_image; ?>">
+		<?php if ( $page_describe !== '' ) { ?>
         <meta name="description" itemprop="description" content="<?php echo $page_describe; ?>">
-		<?php
+		<?php }
 		if ( $mdx_s_key != '' ) {
 			?>
             <meta name="keywords" content="<?php bloginfo( 'name' );
 			echo ',' . $mdx_s_key; ?>">
+		<?php }
+		if ( mdx_get_option( 'mdx_seo_canonical' ) === 'true' ) { ?>
+        <link rel="canonical" href="<?php echo $mdx_current_url; ?>">
 		<?php }
 	}
 	if ( mdx_get_option( 'mdx_chrome_color' ) == 'true' ) {

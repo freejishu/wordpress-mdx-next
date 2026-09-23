@@ -83,6 +83,8 @@ wp_enqueue_media();
 		mdx_update_option( 'mdx_ad', htmlentities( stripslashes( $_POST['mdx_ad'] ) ) );
 		mdx_update_option( 'mdx_logged_in_ad', sanitize_text_field( $_POST['mdx_logged_in_ad'] ) );
 		mdx_update_option( 'mdx_seo_key', sanitize_text_field( $_POST['mdx_seo_key'] ) );
+		mdx_update_option( 'mdx_seo_des_fallback', sanitize_text_field( $_POST['mdx_seo_des_fallback'] ) );
+		mdx_update_option( 'mdx_seo_canonical', sanitize_text_field( $_POST['mdx_seo_canonical'] ) );
 		mdx_update_option( 'mdx_auto_des', sanitize_text_field( $_POST['mdx_auto_des'] ) );
 		mdx_update_option( 'mdx_seo_des', htmlentities( stripslashes( $_POST['mdx_seo_des'] ) ) );
 		mdx_update_option( 'mdx_head_js', htmlentities( stripslashes( $_POST['mdx_head_js'] ) ) );
@@ -682,6 +684,32 @@ wp_enqueue_media();
                 <td><textarea name="mdx_seo_des" id="mdx_seo_des" rows="7"
                               cols="50"><?php echo esc_attr( mdx_get_option( 'mdx_seo_des' ) ) ?></textarea>
                     <p class="description"><?php _e( '在这里编辑网页描述。如开启自动生成网页描述功能，则此空仅对首页有效，其他页面会自动生成网页描述。此空留空则表示关闭全局 SEO 描述功能。', 'mdx' ); ?></p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( 'SEO 描述回退', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_seo_des_fallback = mdx_get_option( 'mdx_seo_des_fallback' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_seo_des_fallback" value="true" <?php if ( $mdx_v_seo_des_fallback == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_seo_des_fallback" value="false" <?php if ( $mdx_v_seo_des_fallback == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，当上方“SEO 描述”留空时，自动使用 WordPress 站点副标题作为网页描述，避免页面缺失 description。', 'mdx' ); ?></p>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e( 'Canonical 链接', 'mdx' ); ?></th>
+                <td>
+					<?php $mdx_v_seo_canonical = mdx_get_option( 'mdx_seo_canonical' ); ?>
+                    <fieldset>
+                        <label><input type="radio" name="mdx_seo_canonical" value="true" <?php if ( $mdx_v_seo_canonical == 'true' ){ ?>checked="checked"<?php } ?>> <?php echo $trueon; ?>
+                        </label><br>
+                        <label><input type="radio" name="mdx_seo_canonical" value="false" <?php if ( $mdx_v_seo_canonical == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
+                        </label><br>
+                        <p class="description"><?php _e( '开启后，在页面头部输出 <code>&lt;link rel="canonical"&gt;</code>，向搜索引擎指明页面的规范地址，避免重复收录。', 'mdx' ); ?></p>
+                    </fieldset>
                 </td>
             </tr>
             </tbody>

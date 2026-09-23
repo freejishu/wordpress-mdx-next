@@ -1,21 +1,17 @@
-.history
-
+# OS junk
 .DS_Store
+Thumbs.db
+desktop.ini
 
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Build artifacts
+*.zip
+node_modules/
+
+# Local tooling / scratch
+scripts/local/
 *.log
-
-_config.yml
-
-node_modules
-
-.idea
-
-.directory
-
-*.map
-
-.vscode
-
-dist
-
-yarn.lock
