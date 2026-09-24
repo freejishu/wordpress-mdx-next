@@ -211,15 +211,39 @@
         <?php if (mdx_get_option("mdx_read_pro") === "true") { ?>
         //Show Read Pro'
         if (document.getElementById('indic')) {
-            ind = radialIndicator("#indic", {
-                displayNumber: false,
-                radius: 26.5,
-                barColor: '#ffffff',
-                roundCorner: false,
-                barWidth: 3,
-                precision: 3,
-                barBgColor: '<?php echo $mdx_style_act_hex;?>',
-            });
+            <?php
+            if (mdx_get_option("mdx_md3") === 'true') {
+                // MD3：进度环底圈=种子色，进度弧按种子色亮度取黑/白
+                $mdx_ring_bg = mdx_get_option('mdx_md3_seed');
+                if (!preg_match('/^#[0-9a-fA-F]{6}$/', (string)$mdx_ring_bg)) {
+                    $mdx_ring_bg = '#6750a4';
+                }
+                $mdx_ring_r = hexdec(substr($mdx_ring_bg, 1, 2));
+                $mdx_ring_g = hexdec(substr($mdx_ring_bg, 3, 2));
+                $mdx_ring_b = hexdec(substr($mdx_ring_bg, 5, 2));
+                $mdx_ring_bar = (0.299 * $mdx_ring_r + 0.587 * $mdx_ring_g + 0.114 * $mdx_ring_b) > 150 ? '#1d1b20' : '#ffffff';
+            } else {
+                $mdx_ring_bg = $mdx_style_act_hex;
+                $mdx_ring_bar = '#ffffff';
+            }
+            ?>
+            window.mdxReInitIndic = function (bgColor, barColor) {
+                var indicEl = document.getElementById('indic');
+                if (!indicEl || typeof radialIndicator === 'undefined') {
+                    return;
+                }
+                indicEl.innerHTML = '';
+                ind = radialIndicator("#indic", {
+                    displayNumber: false,
+                    radius: 26.5,
+                    barColor: barColor,
+                    roundCorner: false,
+                    barWidth: 3,
+                    precision: 3,
+                    barBgColor: bgColor,
+                });
+            };
+            window.mdxReInitIndic('<?php echo $mdx_ring_bg;?>', '<?php echo $mdx_ring_bar;?>');
         }
         <?php } ?>
     </script>

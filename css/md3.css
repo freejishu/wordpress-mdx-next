@@ -125,19 +125,13 @@ body.mdui-theme-layout-dark[class] [class*="mdui-color-theme"]:not(.mdui-color-t
     color: var(--mdx-md3-on-primary-container) !important;
 }
 
-/* ========== 5. 应用栏 / 工具栏：MD3 tonal 着色 ========== */
-/* 浅色：primary-container 色调栏（Material You 风格） */
+/* ========== 5. 应用栏 / 工具栏：滚动后显示主题色（实心 primary），文字按亮度自适应黑/白 ========== */
 body[class] .mdui-toolbar.mdui-color-theme,
-body[class] .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
-    background-color: var(--mdx-md3-primary-container) !important;
-    color: var(--mdx-md3-on-primary-container) !important;
-}
-
-/* 深色：surface-container（MD3 深色应用栏规范） */
+body[class] .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent),
 body.mdui-theme-layout-dark[class] .mdui-toolbar.mdui-color-theme,
 body.mdui-theme-layout-dark[class] .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
-    background-color: var(--mdx-md3-surface-container) !important;
-    color: var(--mdx-md3-on-surface) !important;
+    background-color: var(--mdx-md3-primary) !important;
+    color: var(--mdx-md3-on-primary) !important;
 }
 
 /* MD3 下工具栏保持原主题逻辑（初始透明、滚动后由 JS 加 mdui-color-theme 着色） */

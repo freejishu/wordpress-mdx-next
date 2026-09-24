@@ -99,6 +99,10 @@
             if (mainMeta) {
                 mainMeta.setAttribute('content', hex);
             }
+            // 右下角阅读进度环跟随取色（底圈=取色，弧=按亮度取黑/白）
+            if (typeof window.mdxReInitIndic === 'function') {
+                window.mdxReInitIndic(hex, onPrimary);
+            }
         } catch (e) {
             // 跨域画布污染等情况：静默回退到后台种子色
         }
