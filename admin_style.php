@@ -74,6 +74,10 @@ wp_enqueue_script( 'wp-color-picker' );
 			mdx_update_option( 'mdx_md2_font', 'false' );
 		}
 		mdx_update_option( 'mdx_md3', $_POST['mdx_md3'] );
+		if ( $_POST['mdx_md3'] == 'true' && $_POST['mdx_md2'] == 'true' ) {
+			// MD1/MD2/MD3 三选一互斥，MD3 优先
+			mdx_update_option( 'mdx_md2', 'false' );
+		}
 		$mdx_md3_seed = sanitize_text_field( $_POST['mdx_md3_seed'] );
 		if ( preg_match( '/^#[0-9a-fA-F]{6}$/', $mdx_md3_seed ) ) {
 			mdx_update_option( 'mdx_md3_seed', $mdx_md3_seed );
@@ -298,7 +302,7 @@ wp_enqueue_script( 'wp-color-picker' );
                         </label><br>
                         <label><input type="radio" class="md3" name="mdx_md3" value="false" <?php if ( $mdx_v_md3 == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
                         </label><br>
-                        <p class="description"><?php _e( '开启后，主题将会使用 Material Design 3 (Material You) 风格：更大的圆角、胶囊按钮、柔和阴影与 tonal 配色。仅改变外观，不影响功能。<strong>开启后，上方“主题颜色”“强调颜色”不再生效</strong>，配色由下方 MD3 选项决定，优先级：动态配色（开启且取色成功）&gt; MD3 主色（种子色）。', 'mdx' ); ?></p>
+                        <p class="description"><?php _e( '开启后，主题将会使用 Material Design 3 (Material You) 风格：更大的圆角、胶囊按钮、柔和阴影与 tonal 配色。仅改变外观，不影响功能。<strong>Material Design 1/2/3 三选一互斥，开启任一风格会自动关闭另一个。</strong><strong>开启后，上方“主题颜色”“强调颜色”不再生效</strong>，配色由下方 MD3 选项决定，优先级：动态配色（开启且取色成功）&gt; MD3 主色（种子色）。', 'mdx' ); ?></p>
                     </fieldset>
                 </td>
             </tr>

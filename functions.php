@@ -143,7 +143,7 @@ function mdx_css() {
         wp_register_style('mdx_oled', $files_root.'/css/oled.css', '', '');
         wp_enqueue_style('mdx_oled');
     }
-    if (mdx_get_option("mdx_md2") == "true") {
+    if (mdx_get_option("mdx_md2") == "true" && mdx_get_option("mdx_md3") != "true") {
         wp_register_style('mdx_md2', $files_root.'/css/md2.css', '', '');
         wp_enqueue_style('mdx_md2');
     }

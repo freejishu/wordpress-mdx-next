@@ -110,6 +110,21 @@ body.mdui-theme-layout-dark {
     border-radius: 8px !important;
 }
 
+/* ========== 4.5 经典主题色区域统一换成种子色 ========== */
+/* 凡吃经典主题色（mdui-color-theme，如首页首图底色 theFirstPageBackGround、
+   文章标题区 PostTitle/PostTitleFill、抽屉头图 sideImg 等），MD3 下统一换成种子色。
+   注意：必须放在工具栏规则之前（同优先级时后面的工具栏 container 色生效） */
+body[class]:not(.mdui-theme-layout-dark) [class*="mdui-color-theme"]:not(.mdui-color-transparent):not([class*="mdui-color-theme-accent"]):not(.mdui-toolbar) {
+    background-color: var(--mdx-md3-primary) !important;
+    color: var(--mdx-md3-on-primary) !important;
+}
+
+/* 深色：tonal container；首图/标题区除外（保持 MDx 原有 #212121 压暗逻辑） */
+body.mdui-theme-layout-dark[class] [class*="mdui-color-theme"]:not(.mdui-color-transparent):not([class*="mdui-color-theme-accent"]):not(.mdui-toolbar):not(.PostTitle):not(.PostTitleFill):not(.PostTitleFillBack2):not(.PostTitleFillPageBackGround):not(.theFirstPageBackGround) {
+    background-color: var(--mdx-md3-primary-container) !important;
+    color: var(--mdx-md3-on-primary-container) !important;
+}
+
 /* ========== 5. 应用栏 / 工具栏：MD3 tonal 着色 ========== */
 /* 浅色：primary-container 色调栏（Material You 风格） */
 body .mdui-toolbar.mdui-color-theme,
@@ -125,18 +140,7 @@ body.mdui-theme-layout-dark .mdui-appbar > [class*="mdui-color-"]:not(.mdui-colo
     color: var(--mdx-md3-on-surface) !important;
 }
 
-/* MD3 下工具栏始终着色：不再等滚动后 JS 加 mdui-color-theme（#titleBar=首页/列表页，#titleBarinPost=文章/页面） */
-body #titleBar .mdui-toolbar,
-body #titleBarinPost .mdui-toolbar {
-    background-color: var(--mdx-md3-primary-container) !important;
-    color: var(--mdx-md3-on-primary-container) !important;
-}
-
-body.mdui-theme-layout-dark #titleBar .mdui-toolbar,
-body.mdui-theme-layout-dark #titleBarinPost .mdui-toolbar {
-    background-color: var(--mdx-md3-surface-container) !important;
-    color: var(--mdx-md3-on-surface) !important;
-}
+/* MD3 下工具栏保持原主题逻辑（初始透明、滚动后由 JS 加 mdui-color-theme 着色） */
 
 body .mdui-toolbar.mdui-color-theme a,
 body .mdui-toolbar.mdui-color-theme .mdui-btn,

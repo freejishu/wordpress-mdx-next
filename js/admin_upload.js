@@ -220,6 +220,18 @@ jQuery(document).on('click', 'input.md3', function(){
     }else{
         jQuery('.md3_sub input').removeAttr("disabled");
         jQuery('#mdx_styles,#mdx_styles_act').attr("disabled", "disabled");
+        // MD1/MD2/MD3 三选一互斥：开 MD3 自动关 MD2
+        jQuery('input.md2[value="false"]').prop("checked", true);
+        jQuery('.md2_font input').attr("disabled", "disabled");
+    }
+});
+jQuery(document).on('click', 'input.md2', function(){
+    var mdx_val_md2 = jQuery('input.md2:checked').val();
+    if(mdx_val_md2=='true'){
+        // MD1/MD2/MD3 三选一互斥：开 MD2 自动关 MD3
+        jQuery('input.md3[value="false"]').prop("checked", true);
+        jQuery('.md3_sub input').attr("disabled", "disabled");
+        jQuery('#mdx_styles,#mdx_styles_act').removeAttr("disabled");
     }
 });
 jQuery(".mdx_stbs").click(function(){
