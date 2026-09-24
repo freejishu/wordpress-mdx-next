@@ -55,10 +55,12 @@ wp_enqueue_script( 'wp-color-picker' );
 			'orange'      => '#ffab40',
 			'deep-orange' => '#ff6e40',
 		);
-		mdx_update_option( 'mdx_styles', sanitize_text_field( $_POST['mdx_styles'] ) );
-		mdx_update_option( 'mdx_styles_hex', $mdx_color_arr[ sanitize_text_field( $_POST['mdx_styles'] ) ] );
-		mdx_update_option( 'mdx_styles_act', sanitize_text_field( $_POST['mdx_styles_act'] ) );
-		mdx_update_option( 'mdx_act_hex', $mdx_act_arr[ sanitize_text_field( $_POST['mdx_styles_act'] ) ] );
+		if ( isset( $_POST['mdx_styles'], $_POST['mdx_styles_act'] ) ) {
+			mdx_update_option( 'mdx_styles', sanitize_text_field( $_POST['mdx_styles'] ) );
+			mdx_update_option( 'mdx_styles_hex', $mdx_color_arr[ sanitize_text_field( $_POST['mdx_styles'] ) ] );
+			mdx_update_option( 'mdx_styles_act', sanitize_text_field( $_POST['mdx_styles_act'] ) );
+			mdx_update_option( 'mdx_act_hex', $mdx_act_arr[ sanitize_text_field( $_POST['mdx_styles_act'] ) ] );
+		}
 		mdx_update_option( 'mdx_styles_dark', sanitize_text_field( $_POST['mdx_styles_dark'] ) );
 		if ( $_POST['mdx_styles_dark'] !== "disable" ) {
 			mdx_update_option( 'mdx_night_style', 'false' );
@@ -218,7 +220,7 @@ wp_enqueue_script( 'wp-color-picker' );
                         <option value="white" <?php if ( $mdx_v_styles == 'white' ){ ?>selected="selected"<?php } ?>>White</option>
                     </select>
                     <p class="description">
-                        <span class="mdx-color-preview mdx-theme-color-preview"></span> <?php _e( '主题颜色会影响所有页面的主色。', 'mdx' ); ?>
+                        <span class="mdx-color-preview mdx-theme-color-preview"></span> <?php _e( '主题颜色会影响所有页面的主色。', 'mdx' ); ?><strong><?php _e( '开启 Material Design 3 后此选项不生效。', 'mdx' ); ?></strong>
                     </p>
                 </td>
             </tr>
@@ -245,7 +247,7 @@ wp_enqueue_script( 'wp-color-picker' );
                         <option value="deep-orange" <?php if ( $mdx_v_styles_act == 'deep-orange' ){ ?>selected="selected"<?php } ?>>Deep Orange</option>
                     </select>
                     <p class="description">
-                        <span class="mdx-color-preview mdx-accent-color-preview"></span> <?php _e( '强调颜色会影响所有页面的强调色。', 'mdx' ); ?>
+                        <span class="mdx-color-preview mdx-accent-color-preview"></span> <?php _e( '强调颜色会影响所有页面的强调色。', 'mdx' ); ?><strong><?php _e( '开启 Material Design 3 后此选项不生效。', 'mdx' ); ?></strong>
                     </p>
                 </td>
             </tr>
@@ -296,7 +298,7 @@ wp_enqueue_script( 'wp-color-picker' );
                         </label><br>
                         <label><input type="radio" class="md3" name="mdx_md3" value="false" <?php if ( $mdx_v_md3 == 'false' ){ ?>checked="checked"<?php } ?>> <?php echo $falseoff; ?>
                         </label><br>
-                        <p class="description"><?php _e( '开启后，主题将会使用 Material Design 3 (Material You) 风格：更大的圆角、胶囊按钮、柔和阴影与 tonal 配色。仅改变外观，不影响功能。', 'mdx' ); ?></p>
+                        <p class="description"><?php _e( '开启后，主题将会使用 Material Design 3 (Material You) 风格：更大的圆角、胶囊按钮、柔和阴影与 tonal 配色。仅改变外观，不影响功能。<strong>开启后，上方“主题颜色”“强调颜色”不再生效</strong>，配色由下方 MD3 选项决定，优先级：动态配色（开启且取色成功）&gt; MD3 主色（种子色）。', 'mdx' ); ?></p>
                     </fieldset>
                 </td>
             </tr>

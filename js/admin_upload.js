@@ -78,8 +78,10 @@ jQuery(document).ready(function(){
     var selectVMD3 = jQuery('input.md3:checked').val();
     if(selectVMD3 == 'false'){
         jQuery('.md3_sub input').attr("disabled", "disabled");
+        jQuery('#mdx_styles,#mdx_styles_act').removeAttr("disabled");
     }else{
         jQuery('.md3_sub input').removeAttr("disabled");
+        jQuery('#mdx_styles,#mdx_styles_act').attr("disabled", "disabled");
     }
     jQuery("#mdx_md3_seed").wpColorPicker();
     jQuery('#insert-media-button').click(function(){
@@ -210,12 +212,14 @@ jQuery(".md2").click(function(){
         jQuery('.md2_font input').removeAttr("disabled");
     }
 });
-jQuery(".md3").click(function(){
+jQuery(document).on('click', 'input.md3', function(){
     var mdx_val_md3 = jQuery('input.md3:checked').val();
     if(mdx_val_md3=='false'){
         jQuery('.md3_sub input').attr("disabled", "disabled");
+        jQuery('#mdx_styles,#mdx_styles_act').removeAttr("disabled");
     }else{
         jQuery('.md3_sub input').removeAttr("disabled");
+        jQuery('#mdx_styles,#mdx_styles_act').attr("disabled", "disabled");
     }
 });
 jQuery(".mdx_stbs").click(function(){
