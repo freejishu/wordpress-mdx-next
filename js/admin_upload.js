@@ -69,21 +69,20 @@ jQuery(document).ready(function(){
         jQuery('.logo_text').show();
         jQuery('.logo_logo').hide();
     }
-    var selectVO2 = jQuery('input.md2:checked').val();
-    if(selectVO2 == 'false'){
-        jQuery('.md2_font input').attr("disabled", "disabled");
+    var mdxStyleVer = jQuery('input.mdx_style_ver:checked').val();
+    if(mdxStyleVer == 'md2'){
+        jQuery('.md2_font').show();
+        jQuery('.md3_sub').hide();
+    }else if(mdxStyleVer == 'md3'){
+        jQuery('.md2_font').hide();
+        jQuery('.md3_sub').show();
     }else{
-        jQuery('.md2_font input').removeAttr("disabled");
+        jQuery('.md2_font').hide();
+        jQuery('.md3_sub').hide();
     }
-    var selectVMD3 = jQuery('input.md3:checked').val();
-    if(selectVMD3 == 'false'){
-        jQuery('.md3_sub input').attr("disabled", "disabled");
-        jQuery('#mdx_styles,#mdx_styles_act').removeAttr("disabled");
-    }else{
-        jQuery('.md3_sub input').removeAttr("disabled");
-        jQuery('#mdx_styles,#mdx_styles_act').attr("disabled", "disabled");
-    }
-    jQuery("#mdx_md3_seed").wpColorPicker();
+    jQuery('#mdx_md3_seed').on('input', function(){
+        jQuery('#mdx_md3_seed_val').text(this.value);
+    });
     jQuery('#insert-media-button').click(function(){
         var custom_uploader = wp.media({
             multiple: false,
@@ -212,26 +211,17 @@ jQuery(".md2").click(function(){
         jQuery('.md2_font input').removeAttr("disabled");
     }
 });
-jQuery(document).on('click', 'input.md3', function(){
-    var mdx_val_md3 = jQuery('input.md3:checked').val();
-    if(mdx_val_md3=='false'){
-        jQuery('.md3_sub input').attr("disabled", "disabled");
-        jQuery('#mdx_styles,#mdx_styles_act').removeAttr("disabled");
+jQuery(document).on('click', 'input.mdx_style_ver', function(){
+    var mdx_val_ver = jQuery('input.mdx_style_ver:checked').val();
+    if(mdx_val_ver=='md2'){
+        jQuery('.md2_font').show();
+        jQuery('.md3_sub').hide();
+    }else if(mdx_val_ver=='md3'){
+        jQuery('.md2_font').hide();
+        jQuery('.md3_sub').show();
     }else{
-        jQuery('.md3_sub input').removeAttr("disabled");
-        jQuery('#mdx_styles,#mdx_styles_act').attr("disabled", "disabled");
-        // MD1/MD2/MD3 三选一互斥：开 MD3 自动关 MD2
-        jQuery('input.md2[value="false"]').prop("checked", true);
-        jQuery('.md2_font input').attr("disabled", "disabled");
-    }
-});
-jQuery(document).on('click', 'input.md2', function(){
-    var mdx_val_md2 = jQuery('input.md2:checked').val();
-    if(mdx_val_md2=='true'){
-        // MD1/MD2/MD3 三选一互斥：开 MD2 自动关 MD3
-        jQuery('input.md3[value="false"]').prop("checked", true);
-        jQuery('.md3_sub input').attr("disabled", "disabled");
-        jQuery('#mdx_styles,#mdx_styles_act').removeAttr("disabled");
+        jQuery('.md2_font').hide();
+        jQuery('.md3_sub').hide();
     }
 });
 jQuery(".mdx_stbs").click(function(){

@@ -84,7 +84,10 @@
             var rgb = hslToRgb(hsl[0], hsl[1], hsl[2]);
 
             var hex = '#' + toHex(rgb[0]) + toHex(rgb[1]) + toHex(rgb[2]);
+            // 取到的颜色偏亮时用深色文字，偏暗时用白色文字
+            var onPrimary = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) > 150 ? '#1d1b20' : '#ffffff';
             document.documentElement.style.setProperty('--mdx-md3-seed', hex);
+            document.documentElement.style.setProperty('--mdx-md3-on-primary', onPrimary);
             document.body.style.setProperty('--mdx-theme-color', rgb[0] + ',' + rgb[1] + ',' + rgb[2], 'important');
             document.body.style.setProperty('--mdx-theme-color-with-white', rgb[0] + ',' + rgb[1] + ',' + rgb[2], 'important');
         } catch (e) {
