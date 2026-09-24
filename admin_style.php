@@ -5,7 +5,7 @@ $falseoff = __( '关闭', 'mdx' );
 
 //Some errors happend. I can't use WordPress Setting API. It said "Error: options page not found.", so I used another way to save the values.
 wp_enqueue_script( 'media-upload' );
-wp_enqueue_script( 'my-upload', get_bloginfo( 'template_url' ) . '/js/admin_upload.js' );
+wp_enqueue_script( 'my-upload', get_bloginfo( 'template_url' ) . '/js/admin_upload.js', array(), get_option( 'mdx_version_commit' ) );
 wp_enqueue_media();
 wp_enqueue_script( 'thickbox' );
 wp_enqueue_style( 'thickbox' );

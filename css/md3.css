@@ -125,9 +125,25 @@ body.mdui-theme-layout-dark .mdui-appbar > [class*="mdui-color-"]:not(.mdui-colo
     color: var(--mdx-md3-on-surface) !important;
 }
 
+/* MD3 下工具栏始终着色：不再等滚动后 JS 加 mdui-color-theme（#titleBar=首页/列表页，#titleBarinPost=文章/页面） */
+body #titleBar .mdui-toolbar,
+body #titleBarinPost .mdui-toolbar {
+    background-color: var(--mdx-md3-primary-container) !important;
+    color: var(--mdx-md3-on-primary-container) !important;
+}
+
+body.mdui-theme-layout-dark #titleBar .mdui-toolbar,
+body.mdui-theme-layout-dark #titleBarinPost .mdui-toolbar {
+    background-color: var(--mdx-md3-surface-container) !important;
+    color: var(--mdx-md3-on-surface) !important;
+}
+
 body .mdui-toolbar.mdui-color-theme a,
 body .mdui-toolbar.mdui-color-theme .mdui-btn,
-body .mdui-toolbar.mdui-color-theme .seainput {
+body .mdui-toolbar.mdui-color-theme .seainput,
+body .titleBarGobal .mdui-toolbar a,
+body .titleBarGobal .mdui-toolbar .mdui-btn,
+body .titleBarGobal .mdui-toolbar .seainput {
     color: inherit !important;
 }
 
