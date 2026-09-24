@@ -90,6 +90,15 @@
             document.documentElement.style.setProperty('--mdx-md3-on-primary', onPrimary);
             document.body.style.setProperty('--mdx-theme-color', rgb[0] + ',' + rgb[1] + ',' + rgb[2], 'important');
             document.body.style.setProperty('--mdx-theme-color-with-white', rgb[0] + ',' + rgb[1] + ',' + rgb[2], 'important');
+            // 浏览器主题色/主色 meta 同步为取色结果
+            var themeMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeMeta) {
+                themeMeta.setAttribute('content', hex);
+            }
+            var mainMeta = document.querySelector('meta[name="mdx-main-color"]');
+            if (mainMeta) {
+                mainMeta.setAttribute('content', hex);
+            }
         } catch (e) {
             // 跨域画布污染等情况：静默回退到后台种子色
         }

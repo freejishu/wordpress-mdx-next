@@ -127,15 +127,15 @@ body.mdui-theme-layout-dark[class] [class*="mdui-color-theme"]:not(.mdui-color-t
 
 /* ========== 5. 应用栏 / 工具栏：MD3 tonal 着色 ========== */
 /* 浅色：primary-container 色调栏（Material You 风格） */
-body .mdui-toolbar.mdui-color-theme,
-body .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
+body[class] .mdui-toolbar.mdui-color-theme,
+body[class] .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
     background-color: var(--mdx-md3-primary-container) !important;
     color: var(--mdx-md3-on-primary-container) !important;
 }
 
 /* 深色：surface-container（MD3 深色应用栏规范） */
-body.mdui-theme-layout-dark .mdui-toolbar.mdui-color-theme,
-body.mdui-theme-layout-dark .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
+body.mdui-theme-layout-dark[class] .mdui-toolbar.mdui-color-theme,
+body.mdui-theme-layout-dark[class] .mdui-appbar > [class*="mdui-color-"]:not(.mdui-color-transparent) {
     background-color: var(--mdx-md3-surface-container) !important;
     color: var(--mdx-md3-on-surface) !important;
 }
@@ -234,23 +234,23 @@ article a {
     color: var(--mdx-md3-primary);
 }
 
-/* 选中文字 */
-::selection {
-    background: var(--mdx-md3-primary-container);
-    color: var(--mdx-md3-on-primary-container);
+/* 选中文字（压过 style.css 按经典主色 class 写死的 selection） */
+body[class] ::selection,
+body[class] ::-moz-selection,
+body[class] ::-webkit-selection {
+    background: var(--mdx-md3-primary-container) !important;
+    color: var(--mdx-md3-on-primary-container) !important;
 }
 
-/* ========== 11. 进度 / 加载指示 ========== */
-.mdui-progress .mdui-progress-determinate,
-.mdui-progress .mdui-progress-indeterminate,
-.mdui-spinner-color-1.mdui-spinner-layer,
-.mdui-spinner-layer::after {
-    border-color: var(--mdx-md3-primary);
-    background-color: var(--mdx-md3-primary);
+/* ========== 11. 进度 / 加载指示（压过 MDUI 按经典 accent class 写死的颜色） ========== */
+body[class] .mdui-progress .mdui-progress-determinate,
+body[class] .mdui-progress .mdui-progress-indeterminate {
+    background-color: var(--mdx-md3-primary) !important;
 }
 
-.mdui-spinner-layer::after {
-    background-color: transparent;
+body[class] .mdui-spinner-layer::after,
+body[class] .mdui-spinner-color-1.mdui-spinner-layer {
+    border-color: var(--mdx-md3-primary) !important;
 }
 
 /* ========== 12. 深色模式表面色对齐 MD3 ========== */
@@ -317,6 +317,25 @@ body.mdui-theme-layout-dark .mdui-textfield-input {
 
 .mdui-tooltip {
     border-radius: 4px;
+}
+
+/* ========== 14. style.css 按经典主题色/强调色 class 写死的组件 → MD3 ========== */
+/* 时间线页面 hover 下划线（原 accent 色） */
+body[class] .mdx-timeline-archives li a:hover .atitle:after {
+    background-color: var(--mdx-md3-primary) !important;
+}
+
+/* tworows 首页样式的左下悬浮菜单按钮（原 accent 色） */
+body.mdx-first-tworows[class] #menu,
+body.mdx-first-tworows[class] #menu:hover {
+    background-color: var(--mdx-md3-primary-container) !important;
+    color: var(--mdx-md3-on-primary-container) !important;
+}
+
+/* 标题区副标题（原按经典主色写死白色/黑色半透明；深色下首图压暗为 #212121，保持原规则） */
+body[class]:not(.mdui-theme-layout-dark) h1.mdui-center > small {
+    color: var(--mdx-md3-on-primary) !important;
+    opacity: .75;
 }
 
 /* MD3 状态下站点主色变量由种子色接管（PHP 内联输出 rgb 三元组并带 !important） */

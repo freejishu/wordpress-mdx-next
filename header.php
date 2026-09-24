@@ -155,6 +155,13 @@ $mdx_current_url = mdx_get_now_url( is_single(), isset( $post ) ? $post->ID : 0 
 			if ( get_post_meta( $post->ID, "mdx_styles", true ) === "white" ) {
 				$mdx_theme_color = "#ffffff";
 			}
+		}
+		if ( mdx_get_option( 'mdx_md3' ) === 'true' ) {
+			// MD3 模式下浏览器主题色/主色 meta 跟随种子色
+			$mdx_md3_seed_meta = mdx_get_option( 'mdx_md3_seed' );
+			if ( preg_match( '/^#[0-9a-fA-F]{6}$/', (string) $mdx_md3_seed_meta ) ) {
+				$mdx_theme_color = $mdx_md3_seed_meta;
+			}
 		} ?>
         <meta name="theme-color" content="<?php echo $mdx_theme_color; ?>">
         <meta name="mdx-main-color" content="<?php echo $mdx_theme_color; ?>">
