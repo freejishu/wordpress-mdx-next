@@ -2169,18 +2169,21 @@ div.mdui-toolbar > .mdui-typo-headline {
     margin: 0 2px !important;
 }
 .links-co-grid {
-    margin-top: 5px;
-    padding-left: 3px !important;
-    padding-right: 3px !important;
+    margin-top: 12px;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+}
+.links-card {
+    position: relative;
     border-radius: 12px;
     overflow: hidden;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .06);
     transition: box-shadow .2s;
 }
-.links-co-grid:hover {
+.links-card:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, .14), 0 2px 4px rgba(0, 0, 0, .1);
 }
 .links-des-grid-grid {
@@ -2257,7 +2260,7 @@ div.mdui-toolbar > .mdui-typo-headline {
     margin-top: 2px;
     color: rgba(0, 0, 0, .54);
 }
-.mdui-theme-layout-dark .links-co-grid {
+.mdui-theme-layout-dark .links-card {
     background-color: #303030;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .4), 0 1px 2px rgba(0, 0, 0, .3);
 }
@@ -2300,9 +2303,8 @@ div.mdui-toolbar > .mdui-typo-headline {
     border-radius: 3px;
     overflow: hidden;
 }
-.links-co-grid > a {
-    width: calc(100% - 6px);
-    margin-left: 3px;
+.links-card > a {
+    width: 100%;
     text-decoration: none;
     height: 100%;
     position: absolute;
@@ -2310,7 +2312,7 @@ div.mdui-toolbar > .mdui-typo-headline {
     left: 0;
     z-index: 2;
 }
-.links-co-grid > a:before {
+.links-card > a:before {
     display: none !important;
 }
 .mdx-background-404 {
