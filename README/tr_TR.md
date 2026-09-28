@@ -1,22 +1,17 @@
-<div align="right">Language: <a title="English" href="https://github.com/yrccondor/mdx/blob/master/README.md">English</a> | <a title="Chinese" href="https://github.com/yrccondor/mdx/blob/master/README/zh_CN.md">Chinese</a> | Turkish</div>
+<div align="right">Language: <a title="English" href="../README.md">English</a> | <a title="Chinese" href="zh_CN.md">Chinese</a> | Turkish</div>
 
 <br>
 
-<p align="center">
-<img src="https://acdn.flyhigher.top/mdx-2020-new.jpg" alt="MDx">
-</p>
-
-<h1 align="center"><a href="https://mdx.flyhigher.top" target="_blank">MDx</a></h1>
+<h1 align="center"><a href="https://github.com/freejishu/wordpress-mdx-next" target="_blank">MDx Next</a></h1>
 
 > Basit görünüşlü, güçlü.
 
 <p align="center">
-<img alt="Version" src="https://img.shields.io/badge/version-2.0.4-3f51b5.svg?style=flat-square"/>
-<a href="https://flyhigher.top"><img alt="Author" src="https://img.shields.io/badge/author-Axton-red.svg?style=flat-square"/></a>
+<img alt="Version" src="https://img.shields.io/badge/version-1.0.0-3f51b5.svg?style=flat-square"/>
+<a href="https://www.freejishu.com"><img alt="Author" src="https://img.shields.io/badge/author-freejishu-red.svg?style=flat-square"/></a>
 <img alt="WordPress" src="https://img.shields.io/badge/WordPress-5.0%2B-blue.svg?style=flat-square"/>
-<a href="https://mdx.flyhigher.top"><img alt="Download" src="https://img.shields.io/badge/download-2.49M-brightgreen.svg?style=flat-square"/></a>
-<a href="https://github.com/yrccondor/mdx/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL%20V3.0-orange.svg?style=flat-square"/></a>
-<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fyrccondor%2Fmdx?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fyrccondor%2Fmdx.svg?type=shield"/></a>
+<img alt="Based on" src="https://img.shields.io/badge/based%20on-MDx%202.0.4-lightgrey.svg?style=flat-square"/>
+<a href="https://github.com/freejishu/wordpress-mdx-next/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL%20V3.0-orange.svg?style=flat-square"/></a>
 </p>
 
 
@@ -24,6 +19,7 @@
 
 - [İçerikler](#i̇çerikler)
 - [Tanıtım](#tanıtım)
+- [MDx Next'teki Yenilikler](#mdx-nextteki-yenilikler)
 - [Demo](#demo)
 - [İndir](#i̇ndir)
 - [Globalleştirme](#globalleştirme)
@@ -34,69 +30,77 @@
 
 ## Tanıtım
 
-MDx: hafif, zarif ve güçlü Materyal Tasarım ile donatılmış WordPress teması.
+MDx Next: hafif, zarif ve güçlü Materyal Tasarım ile donatılmış WordPress teması. [AxtonYao](https://flyhigher.top) tarafından geliştirilen [MDx](https://github.com/yrccondor/mdx) 2.0.4 tabanlı bir türev çalışmadır; GPL-3.0 lisansıyla geliştirilmeye devam etmekte ve Material Design 3 (Material You) desteği ile bir dizi düzeltme ve iyileştirme sunmaktadır.
 
-Öne Çıkan ÖZellikler:
+Öne çıkan özellikler (MDx'ten miras):
 
-- Tamamen Materyal Tasarım ile tasarlandı, isteğe bağlı Materyal Tasarım 2 kullanılabilir.
+- Tamamen Materyal Tasarım ile tasarlandı, Material Design 1 / 2 / 3 stilleri tek tıkla değiştirilebilir
 - 4 anasayfa stili, 5 gönderi stili, 3 footer stili & 4 sayfa stili
-- 20 tema rengi & 16 vurgu rengi
+- 20 tema rengi & 16 vurgu rengi (klasik stiller) veya tamamen türetilmiş MD3 tonal paleti
 - Gece modu ve daima koyu mod özellikleri isteğe bağlı ayarlanabilir
 - SEO dostu, Facebook ve Twitter'da kolay paylaşım
-- Hızlı ve hafif, Pagespeed puanı 99% & YSlow puanı 98% (Küçültülmüş kurulumla test edildi)
-- jQuery bağımlılığı yok
+- Hızlı ve hafif, jQuery bağımlılığı yok
 - İşinizi güzel paylaşım kartları ile paylaşma
-- Yerleşik TOC
-- Yerleşik lightbox 
-- 7 adet yerleşik kısakod
-- Çoklu dil desteği (Basitleştirilmiş Çince, Geleneksel Çince(Tayvan), Geleneksel Çince(Hong Kong), Türkçe & İngilizce)
+- Yerleşik TOC, lightbox ve 7 adet kısakod
+- Çoklu dil desteği (Basitleştirilmiş Çince, Geleneksel Çince (Tayvan), Geleneksel Çince (Hong Kong), Türkçe & İngilizce)
 - ✨ İnteraktif arama
 - ✨ Çarpraz platformlarda kolayca okumaya devam etme
 
 
+## MDx Next'teki Yenilikler
+
+Yukarı akış MDx 2.0.4'e kıyasla:
+
+- 🎨 **Material Design 3 (Material You) stil katmanı** — yönetim panelinde birleşik MD1 / MD2 / MD3 stil seçici; klasik stiller tamamen korunur
+- 🌱 **Tohum rengi** — yerel renk seçiciyle herhangi bir rengi seçin; tüm sitenin tonal paleti (açık & koyu) `color-mix()` ile bundan türetilir
+- 🖼️ **İsteğe bağlı dinamik renk** — tema rengini anasayfa görselinden otomatik olarak çıkarır (zarif geri dönüş ile)
+- 🌗 **Uyarlanabilir ön plan rengi** — renkli yüzeylerdeki metin, parlaklığa göre otomatik olarak açık veya koyu renge geçer
+- 🧭 **Temalı araç çubuğu & okuma halkası** — kaydırma sonrası araç çubuğu düz tohum rengine döner ve metni uyarlanır; okuma ilerleme halkası tema rengini takip eder
+- 🟦 **MD3 makale görselleri** — makale içi görseller için isteğe bağlı 12px yuvarlatılmış köşeler (yalnızca MD3, satır içi stil, önbellek sorunu yok)
+- 🔧 **Düzeltmeler & iyileştirmeler** — SEO ve paylaşım düzeltmeleri, video arka plan desteği, arkadaş bağlantıları dört sütun düzeni, yukarı akış imgbox düzeltmesi
+
+
 ## Demo
 
-- [MDx Blog](https://mdxblog.flyhigher.top)
-- [Flyhigher - Çince Demo](https://flyhigher.top)
-- [Hasan Can - Türkçe Demo](https://hasan.im)
+- [freejishu'nun Blogu (Çince)](https://www.freejishu.com)
 
 
 ## İndir
 
-MDx'i [buradan](https://mdx.flyhigher.top) indirebilirsiniz.
+MDx Next'i [sürümler](https://github.com/freejishu/wordpress-mdx-next/releases) sayfasından indirebilir veya en güncel `main` dalı için **Code → Download ZIP** seçeneğini kullanabilirsiniz. **Bu depoyu yalnızca indirmek için `klonlamayın`.**
 
-Dilerseniz MDx'i [sürümler](https://github.com/yrccondor/mdx/releases)den indirebilirsiniz. **Bu depoyu yalnızca indirmek için `klonlamayın`**
+İndirdikten sonra tema dizinini `wp-content/themes/` klasörüne yükleyin ve Görünüm → Temalar bölümünden etkinleştirin.
 
 
 ## Globalleştirme
 
-MDx çoklu dil desteklemektedir. Varsayılan dil Çince(Basitleştirilmiş)'dir.
+MDx Next çoklu dil desteklemektedir. Varsayılan dil Çince (Basitleştirilmiş)'dir.
 
 Desteklenen dil(ler):
 
 - Çince (Basitleştirilmiş)
 - Türkçe ([Hasan CAN](https://github.com/Sn0bzy) tarafından)
 - İngilizce ([Ye Shu](https://github.com/yechs) tarafından)
-- Geleneksel Çince(Tayvan) ([AngelKitty](https://github.com/AngelKitty) tarafından)
-- Geleneksel Çince(Hong Kong)
+- Geleneksel Çince (Tayvan) ([AngelKitty](https://github.com/AngelKitty) tarafından)
+- Geleneksel Çince (Hong Kong)
 
-> MDx'i diğer dillere çevirmemize yardımcı olabilirsiniz!
+> MDx Next'i diğer dillere çevirmemize yardımcı olabilirsiniz!
 
 
 ## Dökümanlar
 
-[MDx Dökümanları (Çince)](https://doc.flyhigher.top/mdx/)
-
-> İngilizce ve Türkçe dökümanlar oluşturuluyor.
+MDx Next, seçeneklerinin çoğunu MDx ile paylaştığından [MDx Dökümanları (Çince)](https://doc.flyhigher.top/mdx/) hâlâ geçerlidir. MDx Next'e özgü seçenekler (stil seçici, tohum rengi, dinamik renk, makale görseli köşe yarıçapı vb.) WordPress yönetim panelindeki MDx tema ayarları bölümünde bulunabilir.
 
 
 ## Lisans
 
-<a href="https://github.com/yrccondor/mdx/blob/master/LICENSE"><img alt="Lisans" src="https://img.shields.io/badge/license-GPL%20V3.0-orange.svg?style=flat-square"/></a>
+<a href="https://github.com/freejishu/wordpress-mdx-next/blob/main/LICENSE"><img alt="Lisans" src="https://img.shields.io/badge/license-GPL%20V3.0-orange.svg?style=flat-square"/></a>
 
-GPL 3.0 altında açık kaynak olarak lisanslanmıştır.
+GPL 3.0 altında açık kaynak olarak lisanslanmıştır. MDx Next, [AxtonYao](https://flyhigher.top) tarafından geliştirilen ve yine GPL 3.0 ile lisanslanan [MDx](https://github.com/yrccondor/mdx)'in türev bir çalışmasıdır.
 
 
 ## Çıktı
 
-![](https://acdn.flyhigher.top/wp-content/uploads/2017/11/det.jpg)
+![](assets/render-index.jpg)
+
+![](assets/render-post.jpg)
