@@ -114,6 +114,7 @@ $mdx_default_values = array(
     'mdx_footer' => '',
     'mdx_hide_footer' => 'false',
     'mdx_friendly_links_style' => '0',
+    'mdx_friendly_links_cols' => '4',
     'mdx_seo_des_fallback' => 'true',
     'mdx_seo_canonical' => 'true',
     'mdx_index_video_url' => '',

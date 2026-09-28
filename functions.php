@@ -398,6 +398,15 @@ function get_the_link_items($id = null) {
     $mdx_v_friendly_links_style = mdx_get_option('mdx_friendly_links_style');
     $mdx_gravatar_actived = mdx_get_option('mdx_gravatar_actived');
     $mdx_link_rand_order = mdx_get_option('mdx_link_rand_order');
+    $mdx_links_cols = mdx_get_option('mdx_friendly_links_cols');
+    $links_col_class = 'mdui-col-xs-4 mdui-col-sm-3';
+    if ($mdx_links_cols === '2') {
+        $links_col_class = 'mdui-col-xs-6 mdui-col-sm-6';
+    } elseif ($mdx_links_cols === '3') {
+        $links_col_class = 'mdui-col-xs-6 mdui-col-sm-4';
+    } elseif ($mdx_links_cols === '6') {
+        $links_col_class = 'mdui-col-xs-4 mdui-col-sm-2';
+    }
     $order_rule = '';
     if ($id !== null) {
         $order_rule = 'category='.$id;
@@ -424,7 +433,7 @@ function get_the_link_items($id = null) {
                 $rel = 'rel="'.$bookmark->link_rel.'" ';
             }
             if ($mdx_v_friendly_links_style == '0') {
-                $output .= '<div class="mdui-row mdui-col-xs-4 mdui-col-sm-3 links-co-grid"><div class="links-c-grid mdui-color-theme"></div><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'"><div class="mdx-links-bg-grid '.$lazy_load.'"></div></a><div class="mdui-grid-tile-actions links-des-grid"><div class="mdui-grid-tile-text"><div class="mdui-grid-tile-title links-name-grid"><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'">'.$bookmark->link_name.'</a></div><div class="mdui-grid-tile-subtitle">'.$bookmark->link_description.'</div></div></div></div>';
+                $output .= '<div class="mdui-row '.$links_col_class.' links-co-grid"><div class="links-c-grid mdui-color-theme"></div><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'"><div class="mdx-links-bg-grid '.$lazy_load.'"></div></a><div class="mdui-grid-tile-actions links-des-grid"><div class="mdui-grid-tile-text"><div class="mdui-grid-tile-title links-name-grid"><a '.$rel.'href="'.$bookmark->link_url.'" title="'.$bookmark->link_name.'" target="'.$bookmark->link_target.'">'.$bookmark->link_name.'</a></div><div class="mdui-grid-tile-subtitle">'.$bookmark->link_description.'</div></div></div></div>';
             } elseif ($mdx_v_friendly_links_style == '1') {
                 if ($bookmark->link_rss != null) {
                     $rss_html = '
@@ -436,7 +445,7 @@ function get_the_link_items($id = null) {
                     $rss_html = '';
                 }
                 $output .= '
-                <div class="mdui-row mdui-col-xs-6 mdui-col-sm-4 mdui-card">
+                <div class="mdui-row '.$links_col_class.' mdui-card">
                   <div class="mdui-card-header">
                     <div class="mdui-card-header-avatar mdx-links-avatar-card '.$lazy_load.'"></div>
                     <div class="mdui-card-header-title">'.$bookmark->link_name.'</div>

@@ -163,6 +163,9 @@ wp_enqueue_script( 'wp-color-picker' );
 		}
 		mdx_update_option( 'mdx_footer', htmlentities( stripslashes( $_POST['mdx_footer'] ) ) );
         mdx_update_option( 'mdx_friendly_links_style', sanitize_text_field( $_POST['mdx_friendly_links_style'] ) );
+        if ( isset( $_POST['mdx_friendly_links_cols'] ) ) {
+            mdx_update_option( 'mdx_friendly_links_cols', sanitize_text_field( $_POST['mdx_friendly_links_cols'] ) );
+        }
 		?>
         <div class="notice notice-success is-dismissible">
             <p><?php _e( '设置已保存。', 'mdx' ); ?></p>
@@ -821,7 +824,20 @@ wp_enqueue_script( 'wp-color-picker' );
                     <option value="0" <?php if($mdx_v_friendly_links_style=='0'){?>selected="selected"<?php }?>><?php _e('网格', 'mdx');?></option>
                     <option value="1" <?php if($mdx_v_friendly_links_style=='1'){?>selected="selected"<?php }?>><?php _e('卡片', 'mdx');?></option>
                 </select>
-                <p class="description"><?php _e('影响友情链接页面样式。目前仅"卡片"样式支持显示描述。', 'mdx');?></p>
+                <p class="description"><?php _e('影响友情链接页面样式。', 'mdx');?></p>
+                </td>
+                </tr>
+                <tr>
+                <th scope="row"><label for="mdx_friendly_links_cols"><?php _e('友情链接每行数量', 'mdx');?></label></th>
+                <td>
+                <?php $mdx_v_friendly_links_cols=mdx_get_option('mdx_friendly_links_cols');?>
+                <select name="mdx_friendly_links_cols" id="mdx_friendly_links_cols">
+                    <option value="2" <?php if($mdx_v_friendly_links_cols=='2'){?>selected="selected"<?php }?>>2</option>
+                    <option value="3" <?php if($mdx_v_friendly_links_cols=='3'){?>selected="selected"<?php }?>>3</option>
+                    <option value="4" <?php if($mdx_v_friendly_links_cols=='4' || $mdx_v_friendly_links_cols===false){?>selected="selected"<?php }?>>4</option>
+                    <option value="6" <?php if($mdx_v_friendly_links_cols=='6'){?>selected="selected"<?php }?>>6</option>
+                </select>
+                <p class="description"><?php _e('友情链接在桌面端每行显示的数量（移动端会自动减少）。对网格和卡片样式均生效。', 'mdx');?></p>
                 </td>
                 </tr>
             </tbody>
