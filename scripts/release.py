@@ -102,6 +102,19 @@ def main():
         run_git("push", "origin", "main")
         run_git("push", "origin", tag)
         print("pushed: origin main + " + tag)
+
+        # 7. best-effort jsDelivr cache refresh for the update metadata.
+        # Branch URLs are cached up to ~12h; purging usually speeds it up,
+        # but full propagation can still take a while.
+        import urllib.request
+        purge_url = ("https://purge.jsdelivr.net/gh/freejishu/"
+                     "wordpress-mdx-next@main/info.json")
+        try:
+            urllib.request.urlopen(purge_url, timeout=20).read()
+            print("jsdelivr cache purge requested (info.json @main)")
+        except Exception as exc:
+            print(f"warn: jsdelivr purge failed ({exc}); "
+                  "metadata will propagate within ~12h anyway")
     else:
         print("next: git push origin main && git push origin " + tag)
 
