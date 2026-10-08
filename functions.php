@@ -169,6 +169,8 @@ function mdx_css() {
             // MD3 形状规范：正文图片直接嵌入内容块并带 12px 圆角（corner.medium），排除 wp-smiley 表情
             wp_add_inline_style('mdx_md3', 'article img:not(.wp-smiley){border-radius:12px;}');
         }
+        // MD3 形状规范：友情链接封面图内嵌为 12px 圆角（corner.medium）媒体块，四周留 8px 间距，仅 MD3 生效；MD1/MD2 保持满幅
+        wp_add_inline_style('mdx_md3', '.links-card .links-c-grid{margin:8px 8px 0;border-radius:12px;padding-top:calc(100% - 16px);}');
     }
     if (is_home() && mdx_get_option('mdx_index_head_style') === 'slide') {
         wp_register_style('mdx_flickity_css', $files_root.'/css/flickity.min.css', '', '');
