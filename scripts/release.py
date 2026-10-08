@@ -43,9 +43,10 @@ def main():
     version = argv[0]
     tag = "v" + version
 
-    # Preconditions
-    if run_git("status", "--porcelain"):
-        sys.exit("error: working tree is dirty, commit or stash your changes first.")
+    # Preconditions (untracked local files are fine; tracked changes are not)
+    dirty = run_git("status", "--porcelain", "--untracked-files=no")
+    if dirty:
+        sys.exit("error: working tree has uncommitted changes, commit or stash them first.")
     if run_git("tag", "--list", tag):
         sys.exit(f"error: tag {tag} already exists.")
 
