@@ -1,10 +1,10 @@
 name: Deploy to test site
 
-# push 到 main 即部署到测试站 test-wordpress.freejishu.com
+# push 到 dev 即部署到测试站 test-wordpress.freejishu.com
 # 所有服务器信息均存于 GitHub Secrets，本文件不含任何敏感信息
 on:
   push:
-    branches: [main]
+    branches: [dev]
   workflow_dispatch:
 
 # 最小权限：本 workflow 不需要读写仓库

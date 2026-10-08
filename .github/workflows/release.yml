@@ -1,0 +1,76 @@
+name: Release theme package
+
+# push 到 main 即打包 WordPress 可安装的主题 zip：
+# - 作为 workflow artifact 提供下载
+# - 同时附加到与 style.css 版本号对应的 GitHub Release（tag 不存在则自动创建）
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 需要创建/更新 Release
+permissions:
+  contents: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version from style.css
+        id: ver
+        run: |
+          VERSION=$(grep -m1 '^Version:' style.css | tr -d '\r' | awk '{print $2}')
+          test -n "$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Assemble installable zip
+        run: |
+          set -e
+          rm -rf package wordpress-mdx-next.zip
+          mkdir -p package/wordpress-mdx-next
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            --exclude='.gitignore' \
+            --exclude='scripts/' \
+            --exclude='gutenberg-src/' \
+            --exclude='src/' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
+            --exclude='webpack.config.js' \
+            --exclude='babel.config.json' \
+            --exclude='postcss.config.js' \
+            --exclude='subset-font-test.html' \
+            ./ package/wordpress-mdx-next/
+          cd package && zip -rq ../wordpress-mdx-next.zip wordpress-mdx-next
+          cd .. && ls -lh wordpress-mdx-next.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wordpress-mdx-next-${{ steps.ver.outputs.version }}
+          path: wordpress-mdx-next.zip
+          retention-days: 30
+
+      - name: Publish to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.ver.outputs.version }}
+        run: |
+          set -e
+          TAG="v$VERSION"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" wordpress-mdx-next.zip --clobber
+          else
+            gh release create "$TAG" wordpress-mdx-next.zip \
+              --title "wordpress-mdx-next $TAG" \
+              --notes "WordPress 安装包：后台 外观 → 主题 → 添加 → 上传主题，选择 wordpress-mdx-next.zip 即可。"
+          fi
