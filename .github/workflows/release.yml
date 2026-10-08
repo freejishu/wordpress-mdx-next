@@ -33,8 +33,9 @@ jobs:
       - name: Assemble installable zip
         run: |
           set -e
-          rm -rf package wordpress-mdx-next.zip
-          mkdir -p package/wordpress-mdx-next
+          STAGE="$RUNNER_TEMP/package"
+          rm -rf "$STAGE" wordpress-mdx-next.zip
+          mkdir -p "$STAGE/wordpress-mdx-next"
           rsync -a \
             --exclude='.git/' \
             --exclude='.github/' \
@@ -49,9 +50,9 @@ jobs:
             --exclude='babel.config.json' \
             --exclude='postcss.config.js' \
             --exclude='subset-font-test.html' \
-            ./ package/wordpress-mdx-next/
-          cd package && zip -rq ../wordpress-mdx-next.zip wordpress-mdx-next
-          cd .. && ls -lh wordpress-mdx-next.zip
+            ./ "$STAGE/wordpress-mdx-next/"
+          cd "$STAGE" && zip -rq "$GITHUB_WORKSPACE/wordpress-mdx-next.zip" wordpress-mdx-next
+          cd "$GITHUB_WORKSPACE" && ls -lh wordpress-mdx-next.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
