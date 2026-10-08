@@ -99,9 +99,10 @@ if (is_admin()) {
 
 //主题升级
 //[wordpress-mdx-next] 更新源指向本仓库的 info.json，经 fastly.jsdelivr.net 镜像（cdn.jsdelivr.net 已被屏蔽）
+//使用 @latest（解析到最新 tag）而非 @main：分支 URL 有最长 12h 缓存且 purge 不稳定，tag 别名发版即生效
 require 'plugin-update-checker/plugin-update-checker.php';
 $mdxUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-    'https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@main/info.json',
+    'https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@latest/info.json',
     __FILE__,
     'wordpress-mdx-next'
 );

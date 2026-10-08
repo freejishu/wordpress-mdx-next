@@ -108,10 +108,10 @@ def main():
         # but full propagation can still take a while.
         import urllib.request
         purge_url = ("https://purge.jsdelivr.net/gh/freejishu/"
-                     "wordpress-mdx-next@main/info.json")
+                     "wordpress-mdx-next@latest/info.json")
         try:
             urllib.request.urlopen(purge_url, timeout=20).read()
-            print("jsdelivr cache purge requested (info.json @main)")
+            print("jsdelivr cache purge requested (info.json @latest)")
         except Exception as exc:
             print(f"warn: jsdelivr purge failed ({exc}); "
                   "metadata will propagate within ~12h anyway")

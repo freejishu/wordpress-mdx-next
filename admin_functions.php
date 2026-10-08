@@ -43,7 +43,7 @@ function mdx_display_sub_function_three(){
 
     if(function_exists('file_get_contents')){
         //[wordpress-mdx-next] 更新源指向本仓库的 info.json，经 fastly.jsdelivr.net 镜像（原地址 https://cdn.jsdelivr.net/gh/axton-the-robot/mdx-assets@latest/info.json 已弃用）
-        $mdx_data = json_decode(file_get_contents('https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@main/info.json', false));
+        $mdx_data = json_decode(file_get_contents('https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@latest/info.json', false));
         if($mdx_data && isset($mdx_data->version)){
             $mdx_now_version = $mdx_data->version;
             update_option('mdx_new_ver',$mdx_now_version);
