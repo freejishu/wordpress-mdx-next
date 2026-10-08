@@ -74,7 +74,8 @@ remove_filter('single_post_title', 'wptexturize');
 //初始化
 if (!get_option('mdx_first_init')) {
     //用途仅为统计安装量 mdx_key为发送请求时间戳的md5值 mdx_first_init不会在除此外的任何地方被调用
-    if (function_exists('file_get_contents')) {
+    //[wordpress-mdx-next] 已停用向上游服务器的安装量上报，仅保留本地初始化流程
+    /*if (function_exists('file_get_contents')) {
         $opt = array(
             'http' => array('method' => "GET", 'header' => "User-Agent: MDxThemeinWordPress\r\n")
         );
@@ -84,7 +85,8 @@ if (!get_option('mdx_first_init')) {
         update_option('mdx_first_init', 'fun-'.md5($mdx_key));
     } else {
         update_option('mdx_first_init', 'false');
-    }
+    }*/
+    update_option('mdx_first_init', 'disabled');
     include_once('includes/admin_init_fn.php');
 }
 
@@ -96,11 +98,12 @@ if (is_admin()) {
 }
 
 //主题升级
+//[wordpress-mdx-next] 更新源指向本仓库的 info.json，经 fastly.jsdelivr.net 镜像（cdn.jsdelivr.net 已被屏蔽）
 require 'plugin-update-checker/plugin-update-checker.php';
 $mdxUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-    'https://cdn.jsdelivr.net/gh/axton-the-robot/mdx-assets@latest/info.json',
+    'https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@main/info.json',
     __FILE__,
-    'mdx'
+    'wordpress-mdx-next'
 );
 
 //多语言支持
@@ -127,7 +130,7 @@ $files_root = '';
 if (mdx_get_option("mdx_use_cdn") === "custom") {
     $files_root = mdx_get_option("mdx_custom_cdn_root");
 } else if (mdx_get_option("mdx_use_cdn") === "jsdelivr") {
-    $files_root = 'https://cdn.jsdelivr.net/gh/yrccondor/mdx@'.$cdn_commit_version;
+    $files_root = 'https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@'.$cdn_commit_version; //[wordpress-mdx-next] 改用本仓库 + fastly 镜像（cdn.jsdelivr.net 已被屏蔽）
 } else {
     $files_root = get_template_directory_uri();
 }

@@ -23,7 +23,8 @@ function mdx_display_sub_function_two(){
 function mdx_display_sub_function_three(){
     wp_register_style('mdx_admin', get_template_directory_uri().'/includes/admin.css');
     wp_enqueue_style('mdx_admin');
-    if(function_exists('file_get_contents')){
+    //[wordpress-mdx-next] 已停用从上游服务器拉取公告，固定为空
+    /*if(function_exists('file_get_contents')){
         $opt2 = array(
             'http'=>array('method'=>"GET",'header'=>"User-Agent: MDxThemeinWordPress\r\n")
         );
@@ -37,12 +38,18 @@ function mdx_display_sub_function_three(){
         }
     }else{
         $mdx_news = '';
-    }
+    }*/
+    $mdx_news = '';
 
     if(function_exists('file_get_contents')){
-        $mdx_data = json_decode(file_get_contents('https://cdn.jsdelivr.net/gh/axton-the-robot/mdx-assets@latest/info.json', false));
-        $mdx_now_version = $mdx_data->version;
-        update_option('mdx_new_ver',$mdx_now_version);
+        //[wordpress-mdx-next] 更新源指向本仓库的 info.json，经 fastly.jsdelivr.net 镜像（原地址 https://cdn.jsdelivr.net/gh/axton-the-robot/mdx-assets@latest/info.json 已弃用）
+        $mdx_data = json_decode(file_get_contents('https://fastly.jsdelivr.net/gh/freejishu/wordpress-mdx-next@main/info.json', false));
+        if($mdx_data && isset($mdx_data->version)){
+            $mdx_now_version = $mdx_data->version;
+            update_option('mdx_new_ver',$mdx_now_version);
+        }else{
+            $mdx_now_version = '版本号获取失败';
+        }
     }else{
         $mdx_now_version = '版本号获取失败';
     }
@@ -91,7 +98,8 @@ add_action('admin_menu','remove_submenu');
 function mdx_init_theme(){
     if(!get_option('mdx_first_init')){
         //用途仅为统计安装量 mdx_key为发送请求时间戳的md5值 mdx_first_init不会在除此外的任何地方被调用 请保持克制不要恶意访问接口
-        if(function_exists('file_get_contents')){
+        //[wordpress-mdx-next] 已停用向上游服务器的安装量上报，仅保留本地初始化流程
+        /*if(function_exists('file_get_contents')){
             $opt = array(
                 'http'=>array('method'=>"GET",'header'=>"User-Agent: MDxThemeinWordPress\r\n")
             );
@@ -102,10 +110,11 @@ function mdx_init_theme(){
         }else{
             add_action('admin_notices', 'mdx_cant_notice');
             update_option('mdx_first_init', 'false');
-        }
+        }*/
+        update_option('mdx_first_init', 'disabled');
 
         include_once('includes/admin_init_fn.php');
-        include_once('includes/admin_init_style.php');
+        //include_once('includes/admin_init_style.php'); //[wordpress-mdx-next] 该文件不存在，注释掉以避免 warning
     }
     add_action('admin_notices', 'mdx_custom_admin_notice');
 }
